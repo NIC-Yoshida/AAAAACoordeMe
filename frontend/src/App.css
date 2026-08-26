@@ -1,140 +1,404 @@
-.App {
-  text-align: center;
-  min-height: 100vh;
-  background-color: #f5f5f5;
+/* ===== ベース ===== */
+* {
+  box-sizing: border-box;
 }
 
-.login-container {
+body {
+  margin: 0;
+  background-color: #f0ede8;
+}
+
+/* ===== アプリ背景（PC時の全画面） ===== */
+.app-bg {
+  min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  background: linear-gradient(135deg, #f0ede8 0%, #e8e4dc 100%);
+  padding: 24px;
+}
+
+/* ===== スマホフレーム（共通） ===== */
+.phone-frame {
+  width: 100%;
+  max-width: 390px;
+  min-height: 780px;
+  background: #ffffff;
+  border-radius: 36px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ===== ログイン画面 ===== */
+.login-frame {
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 2rem;
+  gap: 1.5rem;
 }
 
 .login-title {
-  font-size: 2.5rem;
-  color: #333;
-  margin-bottom: 2rem;
-  font-weight: bold;
+  font-size: 2.2rem;
+  color: #2c2c2c;
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
 }
 
 .login-box {
   background: white;
-  padding: 2.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-  width: 320px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
 .login-box h2 {
-  margin: 0 0 0.5rem;
-  color: #333;
-  font-size: 1.2rem;
+  margin: 0 0 0.25rem;
+  color: #444;
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
 .login-input {
   padding: 0.75rem 1rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  border: 1.5px solid #e0dcd6;
+  border-radius: 10px;
   font-size: 1rem;
   outline: none;
   transition: border-color 0.2s;
+  background: #fafaf9;
 }
 
 .login-input:focus {
-  border-color: #4a90e2;
+  border-color: #b5a99a;
 }
 
 .login-btn {
-  padding: 0.75rem;
-  background-color: #4a90e2;
+  padding: 0.8rem;
+  background-color: #5c4f42;
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.2s;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 .login-btn:hover {
-  background-color: #357abd;
+  background-color: #443a30;
 }
 
 .login-error {
-  color: #e74c3c;
-  font-size: 0.875rem;
+  color: #c0392b;
+  font-size: 0.85rem;
   margin: 0;
 }
 
-.welcome-screen {
+/* ===== ホーム：ヘッダー ===== */
+.home-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #fff;
+  border-bottom: 1px solid #f0ede8;
+  gap: 8px;
+}
+
+.header-info {
+  flex: 1;
   display: flex;
   flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+/* 位置情報 */
+.location-info {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: #3a3028;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.location-icon {
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.location-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 気象情報 */
+.weather-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.weather-main {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-weight: 500;
+}
+
+.weather-icon {
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.weather-temp {
+  font-size: 0.9rem;
+  color: #3a3028;
+}
+
+.weather-detail {
+  display: flex;
+  gap: 6px;
+  font-size: 0.7rem;
+  color: #8b7d6f;
+}
+
+.weather-condition {
+  font-weight: 500;
+}
+
+.weather-humidity {
+  opacity: 0.8;
+}
+
+/* リセットボタン */
+.reset-btn {
+  background: #f7f5f2;
+  border: 1.5px solid #e0dcd6;
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 0.75rem;
+  color: #5c4f42;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.reset-btn:hover {
+  background: #ece8e2;
+}
+
+.reset-btn:active {
+  transform: scale(0.95);
+}
+
+/* ===== ホーム：メインコンテンツ ===== */
+.home-content {
+  flex: 1;
+  padding: 28px 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  overflow-y: auto;
+}
+
+/* アシスタント行 */
+.assistant-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+/* マスコット：正円ミントグリーン背景、白枠なし */
+.mascot-wrapper {
+  flex-shrink: 0;
+  overflow: hidden;
+  display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  gap: 1rem;
 }
 
-.welcome-screen h1 {
-  font-size: 2.5rem;
-  color: #333;
+.mascot-img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  display: block;
 }
 
-.welcome-screen p {
-  font-size: 1.2rem;
-  color: #555;
+.nav-closet-img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: block;
 }
 
-.logout-btn {
-  padding: 0.5rem 1.5rem;
-  background-color: #e74c3c;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 0.9rem;
+.chat-bubble {
+  background: #f7f5f2;
+  border: 1.5px solid #e8e4dc;
+  border-radius: 4px 16px 16px 16px;
+  padding: 12px 16px;
+  font-size: 0.92rem;
+  color: #3a3028;
+  line-height: 1.6;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+/* シーン選択 */
+.scene-scroll-wrapper {
+  overflow-x: auto;
+  margin: 0 -20px;
+  padding: 0 20px;
+  /* スクロールバー非表示 */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scene-scroll-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.scene-tags {
+  display: flex;
+  gap: 8px;
+  width: max-content;
+}
+
+.scene-tag {
+  background: #fff;
+  border: 1.5px solid #d6d0c8;
+  border-radius: 20px;
+  padding: 7px 16px;
+  font-size: 0.85rem;
+  color: #5c4f42;
   cursor: pointer;
-  margin-top: 1rem;
+  transition: all 0.18s;
+  white-space: nowrap;
+  font-weight: 500;
 }
 
-.logout-btn:hover {
-  background-color: #c0392b;
+.scene-tag:hover {
+  background: #f0ede8;
+  border-color: #b5a99a;
 }
 
-.App-logo {
-  height: 40vmin;
+.scene-tag.selected {
+  background: #5c4f42;
+  border-color: #5c4f42;
+  color: #fff;
+}
+
+/* 選択後メッセージ */
+.selected-message {
+  background: #fdf8f4;
+  border: 1.5px solid #e8d9cc;
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 0.9rem;
+  color: #5c4f42;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* ===== ボトムナビ ===== */
+.bottom-nav {
+  display: flex;
+  border-top: 1.5px solid #f0ede8;
+  background: #fff;
+  padding: 10px 0 14px;
+  position: relative;
+}
+
+/* アクティブインジケーター（スライドする丸角四角） */
+.bottom-nav::before {
+  content: '';
+  position: absolute;
+  width: 85px;
+  height: 62px;
+  background-color: #e8e4dc;
+  border-radius: 37px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: left 0.3s ease;
+  z-index: 0;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* activeに応じた楕円の位置 */
+.bottom-nav.nav-home::before {
+  left: calc(16.666% - 42.5px);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.bottom-nav.nav-closet::before {
+  left: calc(50% - 42.5px);
+}
+
+.bottom-nav.nav-menu::before {
+  left: calc(83.333% - 42.5px);
+}
+
+.nav-item {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 4px;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 4px 0;
+  transition: opacity 0.18s;
+  /* アイコンと文字の高さを揃える */
+  height: 52px;
+  position: relative;
+  z-index: 1;
 }
 
-.App-link {
-  color: #61dafb;
+.nav-item:hover {
+  opacity: 0.7;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.nav-label {
+  font-size: 0.7rem;
+  color: #5c4f42;
+  font-weight: 500;
+  line-height: 1;
+}
+
+/* ナビアイコン用ラッパー */
+.nav-icon-wrapper {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== レスポンシブ：実際のスマホ表示 ===== */
+@media (max-width: 480px) {
+  .app-bg {
+    padding: 0;
+    align-items: flex-start;
+    background: #fff;
   }
-  to {
-    transform: rotate(360deg);
+
+  .phone-frame {
+    border-radius: 0;
+    min-height: 100vh;
+    box-shadow: none;
+    max-width: 100%;
   }
 }
