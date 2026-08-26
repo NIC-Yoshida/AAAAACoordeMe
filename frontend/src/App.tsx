@@ -3,6 +3,18 @@ import './App.css';
 import mascotIconImg from './assets/mascot-icon.png';
 import navClosetImg from './assets/nav-closet.png';
 
+interface User {
+  userId: string;
+}
+
+interface LoginResponse {
+  authenticated?: boolean;
+  user?: User;
+  message?: string;
+}
+
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+
 // --- 位置情報コンポーネント ---
 function LocationInfo() {
   // ダミーデータ（実装時は実際の位置情報から取得）
@@ -98,7 +110,7 @@ function CoordinationProposal({ scene }: { scene: string }) {
     </div>
   );
 }
-function HomeScreen({ onChatReset }: { onChatReset: () => void }) {
+function HomeScreen({ onChatReset, userId }: { onChatReset: () => void; userId?: string }) {
   const scenes = ['仕事', '旅行', 'デート', 'アウトドア', '買い物', 'カジュアル', 'フォーマル', 'スポーツ'];
   const [selectedScene, setSelectedScene] = useState<string | null>(null);
   const [activeNav, setActiveNav] = useState('home');
@@ -121,6 +133,8 @@ function HomeScreen({ onChatReset }: { onChatReset: () => void }) {
 
       {/* メインコンテンツ */}
       <div className="home-content">
+        <div className="selected-message">ようこそ、{userId ?? 'ゲスト'} さん</div>
+
         {/* アシスタント */}
         <div className="assistant-row">
           <MascotIcon />
@@ -187,16 +201,45 @@ function HomeScreen({ onChatReset }: { onChatReset: () => void }) {
 // --- ログイン画面 ---
 function App() {
   const [username, setUsername] = useState('');
+  const [user, setUser] = useState<User | null>(null);
   const [loggedIn, setLoggedIn] = useState(false);
   const [error, setError] = useState('');
   const [chatKey, setChatKey] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = () => {
-    if (username.trim().toUpperCase() === 'ADMIN') {
-      setLoggedIn(true);
-      setError('');
-    } else {
-      setError('ユーザー名が正しくありません');
+  const handleLogin = async () => {
+    const trimmed = username.trim();
+    if (!trimmed) {
+      setError('ユーザー名を入力してください');
+      return;
+    }
+
+    setIsLoading(true);
+    setError('');
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: trimmed }),
+      });
+
+      const data: LoginResponse = await response.json();
+
+      if (response.ok && data.authenticated) {
+        setUser(data.user ?? null);
+        setLoggedIn(true);
+        setError('');
+      } else {
+        setError(data.message || 'ユーザー名が正しくありません');
+      }
+    } catch (err) {
+      console.error('Login error:', err);
+      setError('サーバーへの接続に失敗しました');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -208,7 +251,7 @@ function App() {
   if (loggedIn) {
     return (
       <div className="app-bg">
-        <HomeScreen key={chatKey} onChatReset={handleChatReset} />
+        <HomeScreen key={chatKey} onChatReset={handleChatReset} userId={user?.userId} />
       </div>
     );
   }
@@ -224,12 +267,13 @@ function App() {
             placeholder="ユーザー名"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
+            onKeyDown={(e) => e.key === 'Enter' && !isLoading && handleLogin()}
             className="login-input"
+            disabled={isLoading}
           />
           {error && <p className="login-error">{error}</p>}
-          <button className="login-btn" onClick={handleLogin}>
-            ログイン
+          <button className="login-btn" onClick={handleLogin} disabled={isLoading}>
+            {isLoading ? '照合中...' : 'ログイン'}
           </button>
         </div>
       </div>
