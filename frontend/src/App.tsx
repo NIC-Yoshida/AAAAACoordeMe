@@ -5,6 +5,7 @@ import navClosetImg from './assets/nav-closet.png';
 
 interface User {
   userId: string;
+  [key: string]: any;
 }
 
 interface LoginResponse {
@@ -110,7 +111,14 @@ function CoordinationProposal({ scene }: { scene: string }) {
     </div>
   );
 }
-function HomeScreen({ onChatReset, userId }: { onChatReset: () => void; userId?: string }) {
+
+interface HomeScreenProps {
+  user: User | null;
+  onLogout: () => void;
+  onChatReset: () => void;
+}
+
+function HomeScreen({ user, onLogout, onChatReset }: HomeScreenProps) {
   const scenes = ['仕事', '旅行', 'デート', 'アウトドア', '買い物', 'カジュアル', 'フォーマル', 'スポーツ'];
   const [selectedScene, setSelectedScene] = useState<string | null>(null);
   const [activeNav, setActiveNav] = useState('home');
@@ -128,18 +136,19 @@ function HomeScreen({ onChatReset, userId }: { onChatReset: () => void; userId?:
           <LocationInfo />
           <WeatherInfo />
         </div>
-        <button className="reset-btn" onClick={handleReset}>最初から</button>
+        <div className="header-actions">
+          <button className="reset-btn" onClick={handleReset} title="チャットを最初からやり直す">最初から</button>
+          <button className="logout-btn" onClick={onLogout} title="ログアウト">ログアウト</button>
+        </div>
       </div>
 
       {/* メインコンテンツ */}
       <div className="home-content">
-        <div className="selected-message">ようこそ、{userId ?? 'ゲスト'} さん</div>
-
         {/* アシスタント */}
         <div className="assistant-row">
           <MascotIcon />
           <div className="chat-bubble">
-            こんにちは！<br />今日はどんな予定ですか？
+            こんにちは、<strong>{user?.userId || 'ゲスト'}</strong> さん！<br />今日はどんな予定ですか？
           </div>
         </div>
 
@@ -198,14 +207,18 @@ function HomeScreen({ onChatReset, userId }: { onChatReset: () => void; userId?:
   );
 }
 
+function jsonBody(obj: any): string {
+  return JSON.stringify(obj);
+}
+
 // --- ログイン画面 ---
 function App() {
   const [username, setUsername] = useState('');
   const [user, setUser] = useState<User | null>(null);
   const [loggedIn, setLoggedIn] = useState(false);
   const [error, setError] = useState('');
-  const [chatKey, setChatKey] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [chatKey, setChatKey] = useState(0);
 
   const handleLogin = async () => {
     const trimmed = username.trim();
@@ -218,12 +231,13 @@ function App() {
     setError('');
 
     try {
+      // 大文字・小文字変換を行わず、入力されたIDそのままで完全一致認証APIを呼び出す
       const response = await fetch(`${API_BASE_URL}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username: trimmed }),
+        body: jsonBody({ username: trimmed }),
       });
 
       const data: LoginResponse = await response.json();
@@ -243,6 +257,13 @@ function App() {
     }
   };
 
+  const handleLogout = () => {
+    setLoggedIn(false);
+    setUser(null);
+    setUsername('');
+    setError('');
+  };
+
   // 「最初から」= チャットのみリセット（ログアウトしない）
   const handleChatReset = () => {
     setChatKey(k => k + 1);
@@ -251,7 +272,12 @@ function App() {
   if (loggedIn) {
     return (
       <div className="app-bg">
-        <HomeScreen key={chatKey} onChatReset={handleChatReset} userId={user?.userId} />
+        <HomeScreen 
+          key={chatKey} 
+          user={user} 
+          onLogout={handleLogout} 
+          onChatReset={handleChatReset} 
+        />
       </div>
     );
   }
@@ -272,7 +298,11 @@ function App() {
             disabled={isLoading}
           />
           {error && <p className="login-error">{error}</p>}
-          <button className="login-btn" onClick={handleLogin} disabled={isLoading}>
+          <button 
+            className="login-btn" 
+            onClick={handleLogin}
+            disabled={isLoading}
+          >
             {isLoading ? '照合中...' : 'ログイン'}
           </button>
         </div>
