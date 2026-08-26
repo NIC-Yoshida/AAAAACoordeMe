@@ -108,7 +108,7 @@ function HomeScreen({ onChatReset }: { onChatReset: () => void }) {
         <div className="assistant-row">
           <MascotIcon />
           <div className="chat-bubble">
-            こんにちは！🌟<br />今日はどんな予定ですか？
+            こんにちは！<br />今日はどんな予定ですか？
           </div>
         </div>
 
@@ -130,7 +130,7 @@ function HomeScreen({ onChatReset }: { onChatReset: () => void }) {
         {/* 選択後のメッセージ */}
         {selectedScene && (
           <div className="selected-message">
-            「{selectedScene}」のコーデを提案しますね 👗
+            「{selectedScene}」のコーデを提案しますね！
           </div>
         )}
       </div>

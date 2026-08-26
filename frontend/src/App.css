@@ -323,7 +323,7 @@ body {
   background: #fff;
   padding: 10px 0 14px;
   position: sticky;
-  bottom: 0;
+  bottom: 5mm;
   z-index: 50;
   flex-shrink: 0;
 }
