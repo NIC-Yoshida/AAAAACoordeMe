@@ -52,7 +52,6 @@ function MascotIcon() {
   );
 }
 
-// --- ステータスバーコンポーネント ---
 // --- HOMEアイコン（家型SVG） ---
 function HomeIcon() {
   return (
@@ -80,7 +79,25 @@ function MenuIcon() {
   );
 }
 
-// --- ホーム画面 ---
+// --- コーディネーション提案コンポーネント ---
+function CoordinationProposal({ scene }: { scene: string }) {
+  const demoImages = [1, 2, 3, 4, 5];
+
+  return (
+    <div className="coordination-container">
+      <div className="proposal-header">
+        「{scene}」のコーデを提案しますね 👗
+      </div>
+      <div className="demo-images">
+        {demoImages.map((num) => (
+          <div key={num} className="demo-image-item">
+            <div className="demo-image">{num}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 function HomeScreen({ onChatReset }: { onChatReset: () => void }) {
   const scenes = ['仕事', '旅行', 'デート', 'アウトドア', '買い物', 'カジュアル', 'フォーマル', 'スポーツ'];
   const [selectedScene, setSelectedScene] = useState<string | null>(null);
@@ -129,9 +146,7 @@ function HomeScreen({ onChatReset }: { onChatReset: () => void }) {
 
         {/* 選択後のメッセージ */}
         {selectedScene && (
-          <div className="selected-message">
-            「{selectedScene}」のコーデを提案しますね！
-          </div>
+          <CoordinationProposal scene={selectedScene} />
         )}
       </div>
 
