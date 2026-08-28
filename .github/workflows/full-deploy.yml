@@ -74,7 +74,7 @@ jobs:
         run: |
           cd infrastructure
           npm install -g aws-cdk
-          npx cdk deploy CoordeMeBackendStack --require-approval never --outputs-file outputs.json
+          npx cdk deploy CoordeMeBackendStack --app "node bin/coordeme.js" --require-approval never --outputs-file outputs.json
       
       - name: Get API URL
         id: get-outputs

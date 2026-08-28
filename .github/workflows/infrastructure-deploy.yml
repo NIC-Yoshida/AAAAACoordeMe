@@ -34,19 +34,19 @@ jobs:
       - name: CDK Diff
         run: |
           cd infrastructure
-          npx cdk diff CoordeMeBackendStack
+          npx cdk diff CoordeMeBackendStack --app "node bin/coordeme.js"
         continue-on-error: true
       
       - name: CDK Deploy
         run: |
           cd infrastructure
-          npx cdk deploy CoordeMeBackendStack --require-approval never
+          npx cdk deploy CoordeMeBackendStack --app "node bin/coordeme.js" --require-approval never
       
       - name: Get Stack Outputs
         id: stack-outputs
         run: |
           cd infrastructure
-          npx cdk deploy CoordeMeBackendStack --outputs-file outputs.json
+          npx cdk deploy CoordeMeBackendStack --app "node bin/coordeme.js" --outputs-file outputs.json --require-approval never
           echo "API_URL=$(jq -r '.CoordeMeBackendStack.ApiBaseUrl' outputs.json)" >> $GITHUB_OUTPUT
       
       - name: Display Deployment Info
