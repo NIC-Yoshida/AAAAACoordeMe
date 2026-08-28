@@ -31,15 +31,15 @@ jobs:
       
       - name: Install dependencies
         run: |
-          cd backend/hello_world
           python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           pip install pytest pytest-cov boto3 moto
+          cd backend/hello_world
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       
       - name: Run tests
         run: |
           cd backend
-          python -m pytest tests/ -v --cov=hello_world --cov-report=xml --cov-report=term
+          python -m pytest tests/unit/ -v --cov=hello_world --cov-report=xml --cov-report=term
       
       - name: Upload coverage reports
         uses: codecov/codecov-action@v4

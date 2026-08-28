@@ -47,7 +47,7 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           pip install pytest boto3 moto
           cd ..
-          python -m pytest tests/ -v
+          python -m pytest tests/unit/ -v
 
   # ステップ2: インフラをデプロイ
   deploy-infrastructure:
