@@ -1,0 +1,573 @@
+{
+  "/CoordeMeBackendStack": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)",
+        "...node internals..."
+      ]
+    },
+    {
+      "type": "aws:cdk:stack-tags",
+      "data": [
+        {
+          "key": "ManagedBy",
+          "value": "CDK"
+        },
+        {
+          "key": "Project",
+          "value": "CoordeMe"
+        }
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/ApiBaseUrl": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ApiBaseUrl"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:81:9)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/AuthApiUrl": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiUrl"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:87:9)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/UsersTableName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UsersTableName"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:92:9)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/LambdaFunctionArn": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "LambdaFunctionArn"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:98:9)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CoordeMeApiFunction/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CoordeMeApiFunction405FC185"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:20:32)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:20:32)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CoordeMeApi/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CoordeMeApi6623B3E5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:37:21)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CoordeMeApi/Account": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CoordeMeApiAccount4775ED4D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:37:21)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CoordeMeApi/Endpoint": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CoordeMeApiEndpoint0353AF86"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:37:21)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CoordeMeApiFunction/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CoordeMeApiFunctionServiceRole45058405"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:20:32)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CoordeMeApiFunction/LogRetention/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CoordeMeApiFunctionLogRetentionD3945BFE"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:20:32)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:20:32)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)"
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CoordeMeApi/CloudWatchRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CoordeMeApiCloudWatchRole3821D901"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:37:21)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CoordeMeApi/Deployment/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CoordeMeApiDeploymentAF40CC7D8d96c07f90fcdda8687bf054c6d1a760"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:37:21)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CoordeMeApi/DeploymentStage.Prod/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CoordeMeApiDeploymentStageProdB3D3E9C0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:37:21)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CoordeMeApiFunction/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CoordeMeApiFunctionServiceRoleDefaultPolicyC5C65898"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CoordeMeApi/Default/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CoordeMeApiOPTIONS0A46193A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:37:21)"
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CoordeMeApi/Default/hello/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CoordeMeApihello2983F838"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...RootResource.addResource in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:65:40)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CoordeMeApi/Default/db/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CoordeMeApidb56CCDDA4"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...RootResource.addResource in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:69:37)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CoordeMeApi/Default/auth/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CoordeMeApiauthAA8B15B5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...RootResource.addResource in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:73:39)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CoordeMeApi/Default/hello/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CoordeMeApihelloOPTIONS9D5EFC7D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...RootResource.addResource in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:65:40)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)"
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CoordeMeApi/Default/hello/GET/ApiPermission.CoordeMeBackendStackCoordeMeApi80C299B9.GET..hello": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CoordeMeApihelloGETApiPermissionCoordeMeBackendStackCoordeMeApi80C299B9GEThello41C323CA"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:66:23)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CoordeMeApi/Default/hello/GET/ApiPermission.Test.CoordeMeBackendStackCoordeMeApi80C299B9.GET..hello": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CoordeMeApihelloGETApiPermissionTestCoordeMeBackendStackCoordeMeApi80C299B9GEThello3DF00DF2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:66:23)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CoordeMeApi/Default/hello/GET/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CoordeMeApihelloGET77CD6691"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:66:23)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CoordeMeApi/Default/db/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CoordeMeApidbOPTIONSEB14093B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...RootResource.addResource in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:69:37)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)"
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CoordeMeApi/Default/db/GET/ApiPermission.CoordeMeBackendStackCoordeMeApi80C299B9.GET..db": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CoordeMeApidbGETApiPermissionCoordeMeBackendStackCoordeMeApi80C299B9GETdbF2EEA8BC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:70:20)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CoordeMeApi/Default/db/GET/ApiPermission.Test.CoordeMeBackendStackCoordeMeApi80C299B9.GET..db": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CoordeMeApidbGETApiPermissionTestCoordeMeBackendStackCoordeMeApi80C299B9GETdb1FF79FB6"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:70:20)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CoordeMeApi/Default/db/GET/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CoordeMeApidbGETC3D35FE4"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:70:20)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CoordeMeApi/Default/auth/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CoordeMeApiauthOPTIONS7AC99FE2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...RootResource.addResource in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:73:39)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)"
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CoordeMeApi/Default/auth/login/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CoordeMeApiauthlogin8AA1D936"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:74:44)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CoordeMeApi/Default/auth/login/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CoordeMeApiauthloginOPTIONS29B61D37"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:74:44)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)"
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CoordeMeApi/Default/auth/login/POST/ApiPermission.CoordeMeBackendStackCoordeMeApi80C299B9.POST..auth.login": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CoordeMeApiauthloginPOSTApiPermissionCoordeMeBackendStackCoordeMeApi80C299B9POSTauthloginF0CED54D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:75:23)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CoordeMeApi/Default/auth/login/POST/ApiPermission.Test.CoordeMeBackendStackCoordeMeApi80C299B9.POST..auth.login": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CoordeMeApiauthloginPOSTApiPermissionTestCoordeMeBackendStackCoordeMeApi80C299B9POSTauthlogin9E5CC4EC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:75:23)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/CoordeMeBackendStack/CoordeMeApi/Default/auth/login/POST/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CoordeMeApiauthloginPOST027ED610"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new CoordeMeBackendStack (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\lib\\coordeme-backend-stack.js:75:23)",
+        "<anonymous> (c:\\Users\\senri\\Desktop\\AAAAACoordeMe\\infrastructure\\bin\\coordeme.js:16:22)",
+        "...node internals..."
+      ]
+    }
+  ]
+}

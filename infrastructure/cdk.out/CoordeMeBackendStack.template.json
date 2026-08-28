@@ -1,0 +1,1119 @@
+{
+ "Description": "CoordeMe Backend Infrastructure (Lambda, DynamoDB, API Gateway)",
+ "Resources": {
+  "CoordeMeApiFunctionServiceRole45058405": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "ManagedBy",
+      "Value": "CDK"
+     },
+     {
+      "Key": "Project",
+      "Value": "CoordeMe"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/CoordeMeApiFunction/ServiceRole/Resource"
+   }
+  },
+  "CoordeMeApiFunctionServiceRoleDefaultPolicyC5C65898": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:BatchWriteItem",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:DescribeTable",
+        "dynamodb:GetItem",
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator",
+        "dynamodb:PutItem",
+        "dynamodb:Query",
+        "dynamodb:Scan",
+        "dynamodb:UpdateItem"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:aws:dynamodb:us-east-1:537124973247:table/CoordeMeUsers"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "CoordeMeApiFunctionServiceRoleDefaultPolicyC5C65898",
+    "Roles": [
+     {
+      "Ref": "CoordeMeApiFunctionServiceRole45058405"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/CoordeMeApiFunction/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "CoordeMeApiFunction405FC185": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-537124973247-us-east-1",
+     "S3Key": "51421820177b2c12ef2f05d37023d5d01b29d3f7a11a35fe8535384b92c60028.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "USERS_TABLE_NAME": "CoordeMeUsers"
+     }
+    },
+    "FunctionName": "coordeme-api-handler",
+    "Handler": "app.lambda_handler",
+    "MemorySize": 256,
+    "Role": {
+     "Fn::GetAtt": [
+      "CoordeMeApiFunctionServiceRole45058405",
+      "Arn"
+     ]
+    },
+    "Runtime": "python3.12",
+    "Tags": [
+     {
+      "Key": "ManagedBy",
+      "Value": "CDK"
+     },
+     {
+      "Key": "Project",
+      "Value": "CoordeMe"
+     }
+    ],
+    "Timeout": 10
+   },
+   "DependsOn": [
+    "CoordeMeApiFunctionServiceRoleDefaultPolicyC5C65898",
+    "CoordeMeApiFunctionServiceRole45058405"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/CoordeMeApiFunction/Resource",
+    "aws:asset:path": "asset.51421820177b2c12ef2f05d37023d5d01b29d3f7a11a35fe8535384b92c60028",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "CoordeMeApiFunctionLogRetentionD3945BFE": {
+   "Type": "Custom::LogRetention",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+      "Arn"
+     ]
+    },
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "CoordeMeApiFunction405FC185"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 7
+   },
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/CoordeMeApiFunction/LogRetention/Resource"
+   }
+  },
+  "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "ManagedBy",
+      "Value": "CDK"
+     },
+     {
+      "Key": "Project",
+      "Value": "CoordeMe"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/Resource"
+   }
+  },
+  "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:DeleteRetentionPolicy",
+        "logs:PutRetentionPolicy"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
+    "Roles": [
+     {
+      "Ref": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Handler": "index.handler",
+    "Runtime": "nodejs24.x",
+    "Timeout": 900,
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-537124973247-us-east-1",
+     "S3Key": "2819175352ad1ce0dae768e83fc328fb70fb5f10b4a8ff0ccbcb791f02b0716d.zip"
+    },
+    "Role": {
+     "Fn::GetAtt": [
+      "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
+      "Arn"
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "ManagedBy",
+      "Value": "CDK"
+     },
+     {
+      "Key": "Project",
+      "Value": "CoordeMe"
+     }
+    ]
+   },
+   "DependsOn": [
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/Resource",
+    "aws:asset:path": "asset.2819175352ad1ce0dae768e83fc328fb70fb5f10b4a8ff0ccbcb791f02b0716d",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "CoordeMeApi6623B3E5": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "Description": "API for CoordeMe Application",
+    "Name": "CoordeMe API",
+    "Tags": [
+     {
+      "Key": "ManagedBy",
+      "Value": "CDK"
+     },
+     {
+      "Key": "Project",
+      "Value": "CoordeMe"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/CoordeMeApi/Resource"
+   }
+  },
+  "CoordeMeApiCloudWatchRole3821D901": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "apigateway.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "ManagedBy",
+      "Value": "CDK"
+     },
+     {
+      "Key": "Project",
+      "Value": "CoordeMe"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/CoordeMeApi/CloudWatchRole/Resource"
+   }
+  },
+  "CoordeMeApiAccount4775ED4D": {
+   "Type": "AWS::ApiGateway::Account",
+   "Properties": {
+    "CloudWatchRoleArn": {
+     "Fn::GetAtt": [
+      "CoordeMeApiCloudWatchRole3821D901",
+      "Arn"
+     ]
+    }
+   },
+   "DependsOn": [
+    "CoordeMeApi6623B3E5"
+   ],
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/CoordeMeApi/Account"
+   }
+  },
+  "CoordeMeApiDeploymentAF40CC7D8d96c07f90fcdda8687bf054c6d1a760": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "Description": "API for CoordeMe Application",
+    "RestApiId": {
+     "Ref": "CoordeMeApi6623B3E5"
+    }
+   },
+   "DependsOn": [
+    "CoordeMeApiauthloginOPTIONS29B61D37",
+    "CoordeMeApiauthloginPOST027ED610",
+    "CoordeMeApiauthlogin8AA1D936",
+    "CoordeMeApiauthOPTIONS7AC99FE2",
+    "CoordeMeApiauthAA8B15B5",
+    "CoordeMeApidbGETC3D35FE4",
+    "CoordeMeApidbOPTIONSEB14093B",
+    "CoordeMeApidb56CCDDA4",
+    "CoordeMeApihelloGET77CD6691",
+    "CoordeMeApihelloOPTIONS9D5EFC7D",
+    "CoordeMeApihello2983F838",
+    "CoordeMeApiOPTIONS0A46193A"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/CoordeMeApi/Deployment/Resource",
+    "aws:cdk:do-not-refactor": true
+   }
+  },
+  "CoordeMeApiDeploymentStageProdB3D3E9C0": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "DeploymentId": {
+     "Ref": "CoordeMeApiDeploymentAF40CC7D8d96c07f90fcdda8687bf054c6d1a760"
+    },
+    "MethodSettings": [
+     {
+      "DataTraceEnabled": true,
+      "HttpMethod": "*",
+      "LoggingLevel": "INFO",
+      "MetricsEnabled": true,
+      "ResourcePath": "/*"
+     }
+    ],
+    "RestApiId": {
+     "Ref": "CoordeMeApi6623B3E5"
+    },
+    "StageName": "Prod",
+    "Tags": [
+     {
+      "Key": "ManagedBy",
+      "Value": "CDK"
+     },
+     {
+      "Key": "Project",
+      "Value": "CoordeMe"
+     }
+    ]
+   },
+   "DependsOn": [
+    "CoordeMeApiAccount4775ED4D"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/CoordeMeApi/DeploymentStage.Prod/Resource"
+   }
+  },
+  "CoordeMeApiOPTIONS0A46193A": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Fn::GetAtt": [
+      "CoordeMeApi6623B3E5",
+      "RootResourceId"
+     ]
+    },
+    "RestApiId": {
+     "Ref": "CoordeMeApi6623B3E5"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/CoordeMeApi/Default/OPTIONS/Resource"
+   }
+  },
+  "CoordeMeApihello2983F838": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "CoordeMeApi6623B3E5",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "hello",
+    "RestApiId": {
+     "Ref": "CoordeMeApi6623B3E5"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/CoordeMeApi/Default/hello/Resource"
+   }
+  },
+  "CoordeMeApihelloOPTIONS9D5EFC7D": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "CoordeMeApihello2983F838"
+    },
+    "RestApiId": {
+     "Ref": "CoordeMeApi6623B3E5"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/CoordeMeApi/Default/hello/OPTIONS/Resource"
+   }
+  },
+  "CoordeMeApihelloGETApiPermissionCoordeMeBackendStackCoordeMeApi80C299B9GEThello41C323CA": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "CoordeMeApiFunction405FC185",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-1:537124973247:",
+       {
+        "Ref": "CoordeMeApi6623B3E5"
+       },
+       "/",
+       {
+        "Ref": "CoordeMeApiDeploymentStageProdB3D3E9C0"
+       },
+       "/GET/hello"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/CoordeMeApi/Default/hello/GET/ApiPermission.CoordeMeBackendStackCoordeMeApi80C299B9.GET..hello"
+   }
+  },
+  "CoordeMeApihelloGETApiPermissionTestCoordeMeBackendStackCoordeMeApi80C299B9GEThello3DF00DF2": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "CoordeMeApiFunction405FC185",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-1:537124973247:",
+       {
+        "Ref": "CoordeMeApi6623B3E5"
+       },
+       "/test-invoke-stage/GET/hello"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/CoordeMeApi/Default/hello/GET/ApiPermission.Test.CoordeMeBackendStackCoordeMeApi80C299B9.GET..hello"
+   }
+  },
+  "CoordeMeApihelloGET77CD6691": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "CoordeMeApiFunction405FC185",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "CoordeMeApihello2983F838"
+    },
+    "RestApiId": {
+     "Ref": "CoordeMeApi6623B3E5"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/CoordeMeApi/Default/hello/GET/Resource"
+   }
+  },
+  "CoordeMeApidb56CCDDA4": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "CoordeMeApi6623B3E5",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "db",
+    "RestApiId": {
+     "Ref": "CoordeMeApi6623B3E5"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/CoordeMeApi/Default/db/Resource"
+   }
+  },
+  "CoordeMeApidbOPTIONSEB14093B": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "CoordeMeApidb56CCDDA4"
+    },
+    "RestApiId": {
+     "Ref": "CoordeMeApi6623B3E5"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/CoordeMeApi/Default/db/OPTIONS/Resource"
+   }
+  },
+  "CoordeMeApidbGETApiPermissionCoordeMeBackendStackCoordeMeApi80C299B9GETdbF2EEA8BC": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "CoordeMeApiFunction405FC185",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-1:537124973247:",
+       {
+        "Ref": "CoordeMeApi6623B3E5"
+       },
+       "/",
+       {
+        "Ref": "CoordeMeApiDeploymentStageProdB3D3E9C0"
+       },
+       "/GET/db"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/CoordeMeApi/Default/db/GET/ApiPermission.CoordeMeBackendStackCoordeMeApi80C299B9.GET..db"
+   }
+  },
+  "CoordeMeApidbGETApiPermissionTestCoordeMeBackendStackCoordeMeApi80C299B9GETdb1FF79FB6": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "CoordeMeApiFunction405FC185",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-1:537124973247:",
+       {
+        "Ref": "CoordeMeApi6623B3E5"
+       },
+       "/test-invoke-stage/GET/db"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/CoordeMeApi/Default/db/GET/ApiPermission.Test.CoordeMeBackendStackCoordeMeApi80C299B9.GET..db"
+   }
+  },
+  "CoordeMeApidbGETC3D35FE4": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "CoordeMeApiFunction405FC185",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "CoordeMeApidb56CCDDA4"
+    },
+    "RestApiId": {
+     "Ref": "CoordeMeApi6623B3E5"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/CoordeMeApi/Default/db/GET/Resource"
+   }
+  },
+  "CoordeMeApiauthAA8B15B5": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "CoordeMeApi6623B3E5",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "auth",
+    "RestApiId": {
+     "Ref": "CoordeMeApi6623B3E5"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/CoordeMeApi/Default/auth/Resource"
+   }
+  },
+  "CoordeMeApiauthOPTIONS7AC99FE2": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "CoordeMeApiauthAA8B15B5"
+    },
+    "RestApiId": {
+     "Ref": "CoordeMeApi6623B3E5"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/CoordeMeApi/Default/auth/OPTIONS/Resource"
+   }
+  },
+  "CoordeMeApiauthlogin8AA1D936": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "CoordeMeApiauthAA8B15B5"
+    },
+    "PathPart": "login",
+    "RestApiId": {
+     "Ref": "CoordeMeApi6623B3E5"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/CoordeMeApi/Default/auth/login/Resource"
+   }
+  },
+  "CoordeMeApiauthloginOPTIONS29B61D37": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "CoordeMeApiauthlogin8AA1D936"
+    },
+    "RestApiId": {
+     "Ref": "CoordeMeApi6623B3E5"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/CoordeMeApi/Default/auth/login/OPTIONS/Resource"
+   }
+  },
+  "CoordeMeApiauthloginPOSTApiPermissionCoordeMeBackendStackCoordeMeApi80C299B9POSTauthloginF0CED54D": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "CoordeMeApiFunction405FC185",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-1:537124973247:",
+       {
+        "Ref": "CoordeMeApi6623B3E5"
+       },
+       "/",
+       {
+        "Ref": "CoordeMeApiDeploymentStageProdB3D3E9C0"
+       },
+       "/POST/auth/login"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/CoordeMeApi/Default/auth/login/POST/ApiPermission.CoordeMeBackendStackCoordeMeApi80C299B9.POST..auth.login"
+   }
+  },
+  "CoordeMeApiauthloginPOSTApiPermissionTestCoordeMeBackendStackCoordeMeApi80C299B9POSTauthlogin9E5CC4EC": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "CoordeMeApiFunction405FC185",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:us-east-1:537124973247:",
+       {
+        "Ref": "CoordeMeApi6623B3E5"
+       },
+       "/test-invoke-stage/POST/auth/login"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/CoordeMeApi/Default/auth/login/POST/ApiPermission.Test.CoordeMeBackendStackCoordeMeApi80C299B9.POST..auth.login"
+   }
+  },
+  "CoordeMeApiauthloginPOST027ED610": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "POST",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "CoordeMeApiFunction405FC185",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "CoordeMeApiauthlogin8AA1D936"
+    },
+    "RestApiId": {
+     "Ref": "CoordeMeApi6623B3E5"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/CoordeMeApi/Default/auth/login/POST/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WPQU+EMBCFf8vey2hKomdW40njhvW+GdoRu0BLmKmEEP67oawRT++bvpl5Uw364RHuDzhyZmyTta6C+SxoGoUjX2Y7eeyCreADq5aOyKRa7CqLML9Eb8QFr54+/Z5PNHSO2QW/KIcdzGVoaTWSnkLrzJT6Ei2K8wsykzAUqyjO4RhNQ7KlhZrhNdQlCfkUgb2rUWjECeaSWIrepe1/WBgTohf1TH0bpo68rK+76ixYp5M2KIlDHMz2vTeSr2BX80a/7i0k8bKodOw673y9t/71v0fpoyzKB0tw5btvrUHnoA9Xdi4bohfXEZSb/gDNFSicjAEAAA=="
+   },
+   "Metadata": {
+    "aws:cdk:path": "CoordeMeBackendStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "CoordeMeApiEndpoint0353AF86": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "CoordeMeApi6623B3E5"
+      },
+      ".execute-api.us-east-1.",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "CoordeMeApiDeploymentStageProdB3D3E9C0"
+      },
+      "/"
+     ]
+    ]
+   }
+  },
+  "ApiBaseUrl": {
+   "Description": "API Gateway Base URL (Set this to REACT_APP_API_URL in Amplify)",
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "CoordeMeApi6623B3E5"
+      },
+      ".execute-api.us-east-1.",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "CoordeMeApiDeploymentStageProdB3D3E9C0"
+      },
+      "/"
+     ]
+    ]
+   },
+   "Export": {
+    "Name": "CoordeMeApiBaseUrl"
+   }
+  },
+  "AuthApiUrl": {
+   "Description": "API Gateway endpoint URL for authentication",
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "CoordeMeApi6623B3E5"
+      },
+      ".execute-api.us-east-1.",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "CoordeMeApiDeploymentStageProdB3D3E9C0"
+      },
+      "/auth/login"
+     ]
+    ]
+   }
+  },
+  "UsersTableName": {
+   "Description": "Users DynamoDB Table Name",
+   "Value": "CoordeMeUsers",
+   "Export": {
+    "Name": "CoordeMeUsersTableName"
+   }
+  },
+  "LambdaFunctionArn": {
+   "Description": "Lambda Function ARN",
+   "Value": {
+    "Fn::GetAtt": [
+     "CoordeMeApiFunction405FC185",
+     "Arn"
+    ]
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}
