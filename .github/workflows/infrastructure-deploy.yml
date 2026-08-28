@@ -1,0 +1,58 @@
+name: Infrastructure Deploy
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'infrastructure/**'
+      - '.github/workflows/infrastructure-deploy.yml'
+  workflow_dispatch:  # 手動トリガーを許可
+
+jobs:
+  deploy-infrastructure:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      
+      - name: Install AWS CDK
+        run: npm install -g aws-cdk
+      
+      - name: CDK Diff
+        run: |
+          cd infrastructure
+          npx cdk diff CoordeMeBackendStack
+        continue-on-error: true
+      
+      - name: CDK Deploy
+        run: |
+          cd infrastructure
+          npx cdk deploy CoordeMeBackendStack --require-approval never
+      
+      - name: Get Stack Outputs
+        id: stack-outputs
+        run: |
+          cd infrastructure
+          npx cdk deploy CoordeMeBackendStack --outputs-file outputs.json
+          echo "API_URL=$(jq -r '.CoordeMeBackendStack.ApiBaseUrl' outputs.json)" >> $GITHUB_OUTPUT
+      
+      - name: Display Deployment Info
+        run: |
+          echo "### Deployment Successful! :rocket:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**API Base URL**: ${{ steps.stack-outputs.outputs.API_URL }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Region**: us-east-1" >> $GITHUB_STEP_SUMMARY
+          echo "**Stack**: CoordeMeBackendStack" >> $GITHUB_STEP_SUMMARY

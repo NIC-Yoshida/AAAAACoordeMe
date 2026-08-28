@@ -1,0 +1,114 @@
+name: Full Deployment
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:  # 手動トリガーを許可
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - production
+          - staging
+
+jobs:
+  # ステップ1: すべてのテストを実行
+  test-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+      - name: Install and test
+        run: |
+          cd frontend
+          npm ci
+          npm test -- --passWithNoTests --watchAll=false
+        env:
+          CI: true
+
+  test-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install and test
+        run: |
+          cd backend/hello_world
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install pytest boto3 moto
+          cd ..
+          python -m pytest tests/ -v
+
+  # ステップ2: インフラをデプロイ
+  deploy-infrastructure:
+    needs: [test-frontend, test-backend]
+    runs-on: ubuntu-latest
+    outputs:
+      api-url: ${{ steps.get-outputs.outputs.api_url }}
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      
+      - name: Deploy CDK Stack
+        run: |
+          cd infrastructure
+          npm install -g aws-cdk
+          npx cdk deploy CoordeMeBackendStack --require-approval never --outputs-file outputs.json
+      
+      - name: Get API URL
+        id: get-outputs
+        run: |
+          cd infrastructure
+          API_URL=$(jq -r '.CoordeMeBackendStack.ApiBaseUrl' outputs.json)
+          echo "api_url=$API_URL" >> $GITHUB_OUTPUT
+          echo "Deployed API URL: $API_URL"
+
+  # ステップ3: フロントエンドをビルド（Amplifyが自動デプロイ）
+  notify-deployment:
+    needs: [deploy-infrastructure]
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Deployment Summary
+        run: |
+          echo "### :rocket: Deployment Complete!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Environment**: ${{ github.event.inputs.environment || 'production' }}" >> $GITHUB_STEP_SUMMARY
+          echo "**API URL**: ${{ needs.deploy-infrastructure.outputs.api-url }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Region**: us-east-1" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "#### Next Steps:" >> $GITHUB_STEP_SUMMARY
+          echo "1. Verify API: \`curl ${{ needs.deploy-infrastructure.outputs.api-url }}/hello\`" >> $GITHUB_STEP_SUMMARY
+          echo "2. Check Amplify deployment status" >> $GITHUB_STEP_SUMMARY
+          echo "3. Update Amplify environment variables if API URL changed" >> $GITHUB_STEP_SUMMARY
+      
+      - name: Notify success
+        if: success()
+        run: echo "✅ Deployment completed successfully!"
+      
+      - name: Notify failure
+        if: failure()
+        run: |
+          echo "❌ Deployment failed!"
+          exit 1
