@@ -1,9 +1,7 @@
 name: Full Deployment
 
 on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:  # 手動トリガーを許可
+  workflow_dispatch:  # 手動トリガーのみ
     inputs:
       environment:
         description: 'Target environment'

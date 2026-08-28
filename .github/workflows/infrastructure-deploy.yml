@@ -1,12 +1,7 @@
 name: Infrastructure Deploy
 
 on:
-  push:
-    branches: [ main ]
-    paths:
-      - 'infrastructure/**'
-      - '.github/workflows/infrastructure-deploy.yml'
-  workflow_dispatch:  # 手動トリガーを許可
+  workflow_dispatch:  # 手動トリガーのみ
 
 jobs:
   deploy-infrastructure:

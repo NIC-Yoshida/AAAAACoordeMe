@@ -1,0 +1,72 @@
+name: Pull Request Checks
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  # ステップ1: すべてのテストを実行
+  test-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+      - name: Install and test
+        run: |
+          cd frontend
+          npm ci
+          npm test -- --passWithNoTests --watchAll=false
+        env:
+          CI: true
+      - name: Build check
+        run: |
+          cd frontend
+          npm run build
+
+  test-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install and test
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-cov boto3 moto
+          cd backend/hello_world
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          cd ..
+          python -m pytest tests/unit/ -v --cov=hello_world --cov-report=term
+
+  # ステップ2: CDK Synthで構文チェック
+  validate-infrastructure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install AWS CDK
+        run: npm install -g aws-cdk
+      - name: CDK Synth (構文チェック)
+        run: |
+          cd infrastructure
+          npx cdk synth CoordeMeBackendStack --app "node bin/coordeme.js"
+
+  # ステップ3: すべてのチェックが成功したら、マージ可能と表示
+  all-checks-passed:
+    needs: [test-frontend, test-backend, validate-infrastructure]
+    runs-on: ubuntu-latest
+    steps:
+      - name: All checks passed
+        run: |
+          echo "### ✅ All checks passed!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "This Pull Request is ready to be merged." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Note**: Deployment to production requires manual trigger." >> $GITHUB_STEP_SUMMARY
